@@ -1,43 +1,49 @@
-const mainMenu = {
-    sirloinSteakTips: 13.39,     
-    butterMilkCrispyChicken: 11.99,
-    grilledTalapia: 12.99,  
-  };
-  
-  const mainMenuComment = {
-      "Sirloin Steak Tips": "Incredible choice you've made there",    
-      "Butter Milk Crispy Chicken": "Your going to really like this plate",
-      "Grilled Talapia": "Excellent choice, you have good taste",
+const menus = {
+    entrees: {
+      hamburger: {
+        name: "Hamburger",
+        price: "3.00"
+      },
+      "hot dog": {
+        name: "Hot Dog",
+        price: "2.00"
+      },
+      pizza: {
+        name: "Pizza",
+        price: "2.50"
+      }
+    },
+  sides: {
+      fries: {
+        name: "Fries",
+        price: "1.00"
+      },
+      "cheese fries": {
+        name: "Cheese Fries",
+        price: "2.00"
+      },
+      chips: {
+        name: "Chips",
+        price: ".75"
+      }
+    }
   }
-  
-  
-  const sideMenu = {
-      hashBrowns: 3.39,
-      crispyBreakfastPotatoes: 3.39,
-      crispyPotatoPancake: 3.79,
-  };
-  
-  const sideMenuComment = {
-      "Hash Browns": "the combination with this is awesome",
-      "Crispy Breakfast Potatoes": "good choice there",
-      "crispy Potato Pancakes": "these are such a delicacy here",
-  };
-  
-  
-  alert("Welcome to Laz's Diner, take a look at our Menu\n")
-  
-  function welcomeToLazDiner(food){
-  for (const [key,value] of Object.entries(food)) {
-      result = `${key} are $${value}`;
-      console.log(result)
-   }
+  let bill = 0
+  function menuDisplay(menu) {
+    Object.values(menu).forEach(menuItem => console.log(`${menuItem.name} => ${menuItem.price}`))
   }
-  
-  console.log(welcomeToLazDiner(sideMenu));
-  console.log(welcomeToLazDiner(mainMenu));
-  
-  alert("\nWhat will you be having today?")
-  
-  // function with prompts and conditionals
-  
-  
+  function menuChoice(menu, question) {
+    const userChoice = prompt(question)
+  Object.values(menu).forEach(menuItem => {
+      if (userChoice.toLowerCase() === menuItem.name.toLowerCase()) {
+        console.log(`Great! That will be ${menuItem.price}`)
+        bill += parseFloat(menuItem.price)
+      }
+    })
+  }
+  menuDisplay(menus.entrees)
+  menuChoice(menus.entrees, "What entree would you like today?")
+  menuDisplay(menus.sides)
+  menuChoice(menus.sides, "What first side would you like today?")
+  menuChoice(menus.sides, "What second side would you like today?")
+  console.log(`Your bill today is $${bill.toFixed(2)}. Thank you for coming in!`)
